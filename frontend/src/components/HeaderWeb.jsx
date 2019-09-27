@@ -18,6 +18,10 @@ export default class HeaderWeb extends Component {
                             <li className="nav-item">
                                 <a className="nav-link" href="/login">Login</a>
                             </li>
+                            <li>
+                                 {/* them duong link them newpost */}
+                                 <a className="nav-link" href="/new-post">New post</a>
+                            </li>
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
                             <input className="form-control mr-sm-2" type="text" placeholder="Search" />
