@@ -10,7 +10,7 @@ userRoute.get('/auth/google', passport.authenticate('google', {
 // google redirect -> passport process 
 userRoute.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
     console.log(req.session);
-    res.redirect('http://google.com');
+    res.redirect('http://localhost:3000');
 });
 
 userRoute.get('/logout', (req, res) => {
