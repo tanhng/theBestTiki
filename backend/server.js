@@ -4,11 +4,14 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const session = require('express-session');
-// const cookieSession = require('cookie-session');
+const cookieSession = require('cookie-session');
 
 const test = require('./services/test.routes')
 const userRoute = require('./routes/users.routes');
-
+// them postRouter
+const postRouter = require('./posts/post.route');
+// them uploadRouter
+const uploadRouter = require('./uploads/upload.route');
 // extend
 const passport = require('passport');
 require('./services/passport');
@@ -26,7 +29,8 @@ mongoose.connect("mongodb://localhost:27017/teki-web", { useNewUrlParser: true }
 
         server.use(express.static('public'));
         server.use(cors({
-            origin: 'http://localhost:3000',
+            // phai sua origin de chay duoc frontend cua upload new post
+            origin: ['http://localhost:3000'],
             credentials: true
         }));
         server.use(bodyParser.json());
@@ -47,7 +51,10 @@ mongoose.connect("mongodb://localhost:27017/teki-web", { useNewUrlParser: true }
         // TODO: router
         server.use('/test', test);
         server.use('/user', userRoute);
-
+        // them router post
+        server.use('/post', postRouter);
+        // them uploadRouter
+        server.use('/upload',uploadRouter);
         server.listen(process.env.PORT || 5000, (err) => {
             if (err)
                 throw err;

@@ -17,7 +17,7 @@ export default class HeaderWeb extends Component {
 
     handleLogout = async () => {
         // console.log("object")
-        const data = await fetch("http://localhost:3001/users/logout")
+        const data = await fetch("http://localhost:5000/user/logout")
             .then((res) => { return res.json(); });
         if (data.success) {
             window.localStorage.clear();
@@ -31,13 +31,13 @@ export default class HeaderWeb extends Component {
         return (
             <div>
                 <nav className="navbar navbar-expand-md navbar-light bg-light">
-                    <a className="navbar-brand" href="/">Teki </a>
+                    <a className="navbar-brand" href="/">Teki</a>
                     <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="collapsibleNavId">
-                        {this.state.currentUser ? (
+                    {this.state.currentUser ? (
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item">
                                     Welcome <strong>{this.state.currentUser}, </strong>
@@ -68,7 +68,16 @@ export default class HeaderWeb extends Component {
                         <button className="btn btn-outline-primary my-2 my-sm-0" type="submit"
                             onClick={() => {
                                 this.state.currentUser ? (
-                                    window.location.href = "/create-post"
+                                    window.location.href = "/new-post"
+                                ) : (
+                                        window.location.href = "/login"
+                                    )
+                            }}
+                        >+ New post</button>
+                        <button className="btn btn-outline-warning my-2 my-sm-0" type="submit"
+                            onClick={() => {
+                                this.state.currentUser ? (
+                                    window.location.href = "/new-post"
                                 ) : (
                                         window.location.href = "/login"
                                     )

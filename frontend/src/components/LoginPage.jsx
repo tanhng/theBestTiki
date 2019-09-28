@@ -1,7 +1,6 @@
-
 import React, { Component } from 'react'
 
-export default class LoginScreen extends Component {
+export default class LoginPage extends Component {
     constructor(props) {
         super(props)
 
@@ -106,28 +105,17 @@ export default class LoginScreen extends Component {
                             style={{
                                 margin: '20% 45%'
                             }}
-                            onClick={() => { window.location.href = 'http://localhost:5000/user/auth/google' }}
+                            onClick={(event) => {event.preventDefault();
+                                 window.location.href = 'http://localhost:5000/user/auth/google' }}
                         >
                             Login With Google
                 </button>
-                    </form>
-                </div>
-                <div className="col-4"></div>
+                </form>
             </div>
-        )
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    <div className="col-4"></div>
+                </div>
+                )
+            }
+            }
+            
+                   
