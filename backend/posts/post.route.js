@@ -5,7 +5,7 @@ const postRouter = express.Router();
 
 postRouter.post('/create-post', async (req, res) => {
     try {
-        const newPost = await postModel.create({
+        const newPost = await PostsModel.create({
             imageUrl: req.body.imageUrl,
             content: req.body.content,
             //author: req.session.currentUser._id
@@ -34,10 +34,10 @@ postRouter.get('/get/posts', async (req, res) => {
             pageNumber: joi.number().min(1),
             pageSize: joi.number().min(1).max(50),
         });
-        const validateResult = joi.validate({
+        const validateResult = validateSchema.validate({
             pageNumber: pageNumber,
             pageSize: pageSize,
-        }, validateSchema);
+        });
         if (validateResult.error) {
             const error = validateResult.error.details[0];
             res.status(400).json({

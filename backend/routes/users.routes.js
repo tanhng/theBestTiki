@@ -10,10 +10,7 @@ userRoute.get('/auth/google', passport.authenticate('google', {
 // google redirect -> passport process 
 userRoute.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
     console.log(req.session);
-    res.json({
-        success: true,
-        data: req.user
-    }).redirect("http://locahost:3000/login");
+    res.redirect("http://localhost:3000/");
 });
 
 // `req.user` contains the authenticated user
