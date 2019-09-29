@@ -7,14 +7,33 @@ class PostScreen extends Component {
         imageUrl:'',
         file:undefined,
         errormessage:'',
-        successmessage:''
-        
+        successmessage:'',
+        price:'',
+        name:'',
     };
     handleReturnHomePage = () => {
         window.location.href = `/`;
         this.setState({
             successmessage: '',
          });
+    }
+    //xu li ten cua san pham
+    handleNameChange = (event) => {
+        this.setState({
+            successmessage: '',
+         });
+        this.setState({
+            name: event.target.value,
+        })
+    }
+    //xu li gia cua san pham
+    handlePriceChange = (event) => {
+        this.setState({
+            successmessage: '',
+         });
+        this.setState({
+            price: event.target.value,
+        })
     }
     handleContentChange = (event) => {
         this.setState({
@@ -100,9 +119,13 @@ class PostScreen extends Component {
                         "Content-Type":"application/json"
                     },
                     credentials:'include',
+
                     body:JSON.stringify({
                         content:this.state.content,
                         imageUrl:uploadResult.data,
+                        //them gia va ten cua san pham vao request.body
+                        price: this.state.price,
+                        name: this.state.name,
                     }),
                 }).then((res) => {
                     return res.json();
@@ -170,6 +193,22 @@ class PostScreen extends Component {
                             onChange = {this.handleContentChange}
                         ></textarea>
                     </div>
+                    {/* input ten cua san pham */}
+                    <div className ="form-group">
+                    <input  className="form-control" placeholder="Please input name of the product..."
+                    value={this.state.name}
+                    onChange = {this.handleNameChange}
+                    />
+                    {/* input gia cua san pham */}
+                    </div>
+                    <div className ="form-group">
+                    <input  className="form-control" placeholder="Please input price..."
+                    value={this.state.price}
+                    onChange = {this.handlePriceChange}
+                    />
+                    </div>
+                   
+                    <div className ="form-group"></div>
                     {this.state.errormessage ? (
                         <div className="alert alert-danger" role="alert">
                             {this.state.errormessage}

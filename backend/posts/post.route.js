@@ -4,24 +4,42 @@ const joi = require('@hapi/joi');
 const postRouter = express.Router();
 
 postRouter.post('/create-post', async (req, res) => {
-    try {
-        const newPost = await PostsModel.create({
-            imageUrl: req.body.imageUrl,
-            content: req.body.content,
-            //author: req.session.currentUser._id
-        });
-        res.status(200).json({
-            success: true,
-            message: "upload successed",
-            data: newPost
-        });
-    } catch (err) {
+    if(!req.user || !req.user.email)
+    {
         res.status(500).json({
-            success: false,
-            message: err.message,
-        });
-
+            success:false,
+            message:'forbidden'
+        })
     }
+    else {
+        const postValidateSchema = joi.object().keys({
+            imageUrl: joi.string().required(),
+            content: joi.string().required(),
+            price: joi.number().required(),
+            name: joi.string().required(),
+        })
+        try {
+            const newPost = await PostsModel.create({
+                imageUrl: req.body.imageUrl,
+                content: req.body.content,
+                author: req.user._id,
+                price: req.body.price,
+                name: req.body.name,
+            });
+            res.status(200).json({
+                success: true,
+                message: "upload successed",
+                data: newPost
+            });
+        } catch (err) {
+            res.status(500).json({
+                success: false,
+                message: err.message,
+            });
+    
+        }
+    }
+   
 })
 
 postRouter.get('/get/posts', async (req, res) => {

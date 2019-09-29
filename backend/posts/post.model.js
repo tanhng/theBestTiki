@@ -14,20 +14,25 @@ const PostSchema = new mongoose.Schema({
        type: String,
        require:true,
    },
-   // do chua dang nhap nen tam thoi bo author
-//    author:{
-//         type:mongoose.Schema.Types.ObjectId,
-//         ref:'Account',
-//         // tam thoi chua dang nhap duoc nen ko có
-//         //require:true,
-//    },
+   // them truong ten cua san pham
+  name:{
+      type:String,
+      require:true,
+  },
+   author:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Account',
+        require:true,
+   },
    createdAt:{
        type: Date,
        default:new Date(),
    },
+   //them truong gia ca
    price:{
         type:Number,
         default:0,
+        require:true,
    },
 })
 const PostModel = mongoose.model('Post', PostSchema);
