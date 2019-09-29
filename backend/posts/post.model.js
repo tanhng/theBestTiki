@@ -19,9 +19,10 @@ const PostSchema = new mongoose.Schema({
       type:String,
       require:true,
   },
+  // sua do UsersModel dat ten la Users
    author:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Account',
+        ref:'Users',
         require:true,
    },
    createdAt:{

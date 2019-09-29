@@ -146,8 +146,8 @@ class PostScreen extends Component {
     render() {
         return (
             <div className='row mt-5'>
-            <div className='col-2'></div>
-            <div className='col-8'>
+            <div className='col-4'></div>
+            <div className='col-4'>
                 <form onSubmit={this.handleFormSubmit}>
                     <div className='form-group' >
                         <div
