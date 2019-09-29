@@ -4,7 +4,7 @@ const joi = require('@hapi/joi');
 const postRouter = express.Router();
 
 postRouter.post('/create-post', async (req, res) => {
-    if(!req.user || !req.user.email)
+    if(!req.session.currentUser || !req.session.currentUser.email)
     {
         res.status(500).json({
             success:false,
@@ -22,7 +22,7 @@ postRouter.post('/create-post', async (req, res) => {
             const newPost = await PostsModel.create({
                 imageUrl: req.body.imageUrl,
                 content: req.body.content,
-                author: req.user._id,
+                author: req.session.currentUser._id,
                 price: req.body.price,
                 name: req.body.name,
             });
