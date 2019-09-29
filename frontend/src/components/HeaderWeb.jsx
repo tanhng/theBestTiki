@@ -31,13 +31,13 @@ export default class HeaderWeb extends Component {
         return (
             <div>
                 <nav className="navbar navbar-expand-md navbar-light bg-light">
-                    <a className="navbar-brand" href="/">Teki</a>
+                    <a className="navbar-brand" href="/">Teki </a>
                     <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="collapsibleNavId">
-                    {this.state.currentUser ? (
+                        {this.state.currentUser ? (
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item">
                                     Welcome <strong>{this.state.currentUser}, </strong>
@@ -55,10 +55,6 @@ export default class HeaderWeb extends Component {
                                     <li className="nav-item">
                                         <a className="nav-link" href="/login">Login </a>
                                     </li>
-                                    <li>
-                                        {/* them duong link them newpost */}
-                                        <a className="nav-link" href="/new-post">New post</a>
-                                    </li>
                                 </ul>
                             )}
                         <form className="form-inline my-2 my-lg-0">
@@ -66,15 +62,6 @@ export default class HeaderWeb extends Component {
                             <button className="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
                         </form>
                         <button className="btn btn-outline-primary my-2 my-sm-0" type="submit"
-                            onClick={() => {
-                                this.state.currentUser ? (
-                                    window.location.href = "/new-post"
-                                ) : (
-                                        window.location.href = "/login"
-                                    )
-                            }}
-                        >+ New post</button>
-                        <button className="btn btn-outline-warning my-2 my-sm-0" type="submit"
                             onClick={() => {
                                 this.state.currentUser ? (
                                     window.location.href = "/new-post"
