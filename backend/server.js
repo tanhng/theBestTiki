@@ -4,16 +4,13 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const session = require('express-session');
-const flash = require('connect-flash');
-
-const test = require('./services/test.routes')
-const userRoute = require('./routes/users.routes');
+const userRouter = require('./routes/users.routes');
 const postRouter = require('./posts/post.route');
 const uploadRouter = require('./uploads/upload.route');
 
-// extend
-const passport = require('passport');
-require('./services/passport');
+// // extend
+// const passport = require('passport');
+// require('./services/passport');
 
 // connect to mongodb
 mongoose.connect("mongodb://localhost:27017/teki-web", { useNewUrlParser: true }, (e) => {
@@ -37,13 +34,11 @@ mongoose.connect("mongodb://localhost:27017/teki-web", { useNewUrlParser: true }
             resave: true,
             saveUninitialized: false,
         }));
-        server.use(flash());
-        server.use(passport.initialize());
-        server.use(passport.session());
+        // server.use(passport.initialize());
+        // server.use(passport.session());
         
         // TODO: router
-        server.use('/test', test);
-        server.use('/user', userRoute);
+        server.use('/user', userRouter);
         server.use('/post', postRouter);
         server.use('/upload',uploadRouter);
 

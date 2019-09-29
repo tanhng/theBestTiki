@@ -1,79 +1,109 @@
 const express = require('express');
-const passport = require('passport');
+const bcryptjs = require('bcryptjs');
+const UsersModel = require('../models/users.model');
 
-const userRoute = express.Router();
+const usersRouter = express.Router();
 
-// user req
-userRoute.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'email']
-}));
-// google redirect -> passport process 
-userRoute.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
-    console.log(req.session);
-    res.redirect("http://localhost:3000/");
-});
+//TODO: /users/register
+usersRouter.post("/register", async (req, res) => {
+    try {
+        // validate email, password, fullname
+        const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
-// `req.user` contains the authenticated user
-userRoute.post('/register', (req, res, next) => {
-    // validate (maybe not need)
-
-    // passport
-    passport.authenticate('local-register', (err, user, info) => {
-        if (err) { return next(err); }
-        if (!user) {
-            return res.json({
+        if (!emailRegex.test(req.body.email)) {
+            res.status(400).json({
                 success: false,
-                message: info.message
+                message: "Invalid email address"
             });
+        } else if (req.body.password.length < 6) {
+            res.status(400).json({
+                success: false,
+                message: "Password  too short"
+            });
+        } else {
+
+            // check email exist
+            const data = await UsersModel.findOne({ email: req.body.email }).lean();
+            if (data) {
+                res.status(400).json({
+                    success: false,
+                    message: "Email has been used"
+                });
+            } else {
+                //hash pw
+                const hashPassword = bcryptjs.hashSync(req.body.password, 10);
+                //create user record
+                const newUser = await UsersModel.create({
+                    ...req.body,
+                    password: hashPassword
+                })
+                res.status(201).json({
+                    success: true,
+                    data: newUser
+                });
+            }
         }
-        res.status(200).json({
-            success: true,
-            data: user,
-            message: info.message
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
         });
-    })(req, res, next);
-});
+    }
+})
 
-userRoute.post('/login', (req, res, next) => {
-    // validate (maybe not need)
-
-    // passport
-    passport.authenticate('local-login', (err, user, info) => {
-        if (err) { return next(err); }
-        if (!user) {
-            res.json({
+usersRouter.post("/login", async (req, res) => {
+    try {
+        const data = await UsersModel.findOne({ email: req.body.email }).lean();
+        if (!data) {
+            res.status(400).json({
                 success: false,
-                message: info.message
+                message: "Email doesn't exist"
             });
-        }
-        req.logIn(user, (err) => {
-            if (err) { return next(err); }
+        } else if (!bcryptjs.compareSync(req.body.password, data.password)) {
+            res.status(400).json({
+                success: false,
+                message: "Wrong Password"
+            });
+        } else {
+            req.session.currentUser = {
+                _id: data._id,
+                email: data.email
+            }
+
             res.status(200).json({
                 success: true,
-                data: user,
-                message: info.message
+                message: "Login Success",
+                data: {
+                    email: data.email,
+                }
             });
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
         });
-    })(req, res, next);
-});
+    }
+})
 
-userRoute.get('/logout', (req, res) => {
-    req.logout();
-    res.json({ success: true })
-    // res.redirect('http://localhost:3000');
-});
-
-isLoggedIn = (req, res, next) => {
-    if (req.isAuthenticated()) {return next();}
-    res.redirect('http://localhost:3000/login');
-}
-
-userRoute.get('/profile', isLoggedIn, (req, res)=> {
-    res.json({
-        email: req.user.email,
-        name: req.user.name
+usersRouter.get("/test", (req, res) => {
+    console.log(req.session.currentUser);
+    res.status(500).json({
+        success: true,
     });
 })
 
+usersRouter.get("/logout", (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            res.json({
+                success: false,
+                message: err.message
+            })
+        } else {
+            res.json({success: true});
+        }
+    });
+})
 
-module.exports = userRoute;
+module.exports = usersRouter;
