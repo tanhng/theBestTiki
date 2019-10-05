@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import hihi from '../static/image/138254.svg'
 export default class HeaderWeb extends Component {
     constructor(props) {
         super(props)
@@ -70,6 +70,7 @@ export default class HeaderWeb extends Component {
                                     )
                             }}
                         >+ New post</button>
+                         <button className="btn ml-2 btn-outline-success my-2 my-sm-0 mr-sm-2" type="submit" onClick={()=>{window.location.href='/cart'}}>Cart</button>
                     </div>
                 </nav>
             </div>

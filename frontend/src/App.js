@@ -5,7 +5,7 @@ import LoginPage from './components/LoginPage';
 import HomeScreen from './components/HomeScreen';
 import PostScreen from './components/PostScreen';
 import RegisterPage from './components/RegisterPage';
-
+import CartScreen from './components/CartScreen';
 export default class App extends Component {
   render() {
     return (
@@ -17,6 +17,7 @@ export default class App extends Component {
             <Route path='/login' component={LoginPage} />
             <Route path='/new-post' component={PostScreen} />
             <Route path='/register' component={RegisterPage} />
+            <Route path='/cart' component={CartScreen} />
           </Switch>
         </BrowserRouter>
       </div>
