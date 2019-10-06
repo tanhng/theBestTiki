@@ -6,6 +6,7 @@ export default class HeaderWeb extends Component {
 
         this.state = {
             currentUser: "",
+            searchname:"",
         }
     }
 
@@ -14,7 +15,17 @@ export default class HeaderWeb extends Component {
             currentUser: window.localStorage.getItem("email")
         });
     }
-
+    handleSearchNameChange = (event) => {
+        this.setState({
+            searchname: event.target.value
+        })
+       
+    }
+    handleSearch = (event) => {
+        event.preventDefault();
+        window.localStorage.setItem('searchname',this.state.searchname);
+                                window.location.href = "/search";
+    }
     handleLogout = async () => {
         // console.log("object")
         const data = await fetch("http://localhost:5000/user/logout")
@@ -58,11 +69,21 @@ export default class HeaderWeb extends Component {
                                 </ul>
                             )}
                         <form className="form-inline my-2 my-lg-0">
-                            <input className="form-control mr-sm-2" type="text" placeholder="Search" />
-                            <button className="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
+                            <input className="form-control mr-sm-2" type="text"
+                             placeholder="Search" 
+                             value={this.state.searchname}
+                             onChange={this.handleSearchNameChange}
+                             />
+                            <button className="btn btn-outline-success my-2 my-sm-0 mr-sm-2"
+                             type="submit"
+                             onClick= {
+                                this.handleSearch
+                            }
+                             >Search</button>
                         </form>
                         <button className="btn btn-outline-primary my-2 my-sm-0" type="submit"
                             onClick={() => {
+
                                 this.state.currentUser ? (
                                     window.location.href = "/new-post"
                                 ) : (

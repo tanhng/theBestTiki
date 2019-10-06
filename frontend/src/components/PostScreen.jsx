@@ -12,10 +12,11 @@ class PostScreen extends Component {
         name: '',
     };
     handleReturnHomePage = () => {
-        window.location.href = `/`;
+       
         this.setState({
             successmessage: '',
         });
+        window.location.href = `/`;
     }
     //xu li ten cua san pham
     handleNameChange = (event) => {
