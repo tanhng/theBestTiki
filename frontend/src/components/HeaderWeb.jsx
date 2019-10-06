@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import hihi from '../static/image/138254.svg'
+//import hihi from '../static/image/138254.svg'
 export default class HeaderWeb extends Component {
     constructor(props) {
         super(props)
