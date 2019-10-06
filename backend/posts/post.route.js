@@ -48,6 +48,56 @@ postRouter.post('/deleteCart', async (req, res) => {
 
     try {
         console.log('cái để delete',req.body);
+        id=req.body.postDelete._id;
+        idUser=req.body.postDelete.author._id
+        let money = 0;
+        let order=[];
+
+
+
+        UsersModel.findById(idUser, function (err, user) {
+            if (err) {
+                res.status(500).json({
+                    success: false,
+                    message: error.message,
+                }
+                );
+            }
+            else {order=user.orderList;
+                console.log('orderList ne',order);
+                console.log('user ne', user);
+                money = user.moneyInCart - req.body.postDelete.price;
+                console.log('money delete ne', money);
+               var newOrder= order.filter(function(x){
+                return x._id != id ;
+            });
+            console.log('orderList sau delete ne',newOrder);
+                UsersModel.findByIdAndUpdate(idUser, { moneyInCart: money,orderList: newOrder }, function (err, model) {
+                    if (err) {
+                        res.status(500).json({
+                            success: false,
+                            message: error.message,
+                        }
+                        );
+                    } else {
+                        console.log('model sau delete ne', model);
+                        res.status(200).json({
+                            success: true,
+                            data: model
+                        }
+                        );
+                    }
+                });
+
+              
+
+
+            }
+        })
+
+
+
+
     } catch (err) {
         res.status(500).json({
             success: false,
@@ -71,7 +121,7 @@ postRouter.post('/cart', async (req, res) => {
         console.log('Id ne', req.body.postAdded.author._id)
         let id = req.body.postAdded.author._id
         let money = 0;
-        let orderList=[];
+        let order=[];
         UsersModel.findById(id, function (err, user) {
             if (err) {
                 res.status(500).json({

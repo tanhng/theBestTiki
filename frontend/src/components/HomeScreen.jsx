@@ -3,20 +3,20 @@ import React, { Component } from 'react'
 const pageSize = 9;
 
 class HomeScreen extends Component {
-	state = {
+    state = {
 		data: [],
 		total: 0,
 		currentPageNumber: 1,
-		detailModalVisible: false,
-		selectedPost: undefined,
-	};
+    detailModalVisible: false,
+    selectedPost: undefined,
+    };
+    
 
-
-	componentWillMount() {
+    componentWillMount() {
 		this.getData(1);
 	}
 
-	getData = async pageNumber => {
+    getData = async pageNumber => {
 		try {
 			const result = await fetch(
 				`http://localhost:5000/post/get/posts?pageNumber=${pageNumber}&pageSize=${pageSize}`,
@@ -28,9 +28,9 @@ class HomeScreen extends Component {
 					credentials: 'include'
 				}
 			)
-				.then(res => {
-					return res.json();
-				});
+			.then(res => {
+				return res.json();
+			});
 			console.log(result);
 			this.setState({
 				total: result.data.total,
@@ -40,11 +40,11 @@ class HomeScreen extends Component {
 		} catch (error) {
 			window.alert(error.message);
 		}
-	};
+    };
+    
 
 
-
-	handlePageChange = newPageNumber => {
+    handlePageChange = newPageNumber => {
 		// call getData
 		this.getData(newPageNumber);
 
@@ -77,69 +77,40 @@ class HomeScreen extends Component {
 				currentPageNumber: this.state.currentPageNumber + 1
 			});
 		}
-	};
+  };
 
-	handleAddToCart = async (event) => {
-		event.preventDefault();
-		try {
-			var selectedPost=this.state.selectedPost;
-			console.log('hello',selectedPost)
-			const result = await fetch(
-				`http://localhost:5000/post/cart`,
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					credentials: 'include',
-					body: JSON.stringify({
-						postAdded: selectedPost	
-					}),
-					
-				}
-			)
-				.then((res) => {
-					return res.json();
-				});
-			console.log('selected ne',result);
-			console.log('hello',this.state.selectedPost)
-		} catch (error) {
-			window.alert(error.message);
-		}
-		// window.location.href = '/cart';
-	}
 
-	handlePostClick = (selectedPost) => {
-		this.setState({
-			detailModalVisible: true,
-			selectedPost: selectedPost,
-		});
-	};
+  handlePostClick = (selectedPost) => {
+    this.setState({
+      detailModalVisible: true,
+      selectedPost: selectedPost,
+    });
+  };
 
-	closeDetailModal = () => {
-		this.setState({
-			detailModalVisible: false,
-			selectedPost: undefined,
-		});
-	};
+  closeDetailModal = () => {
+    this.setState({
+      detailModalVisible: false,
+      selectedPost: undefined,
+    });
+  };
 
-	render() {
+    render() {
 		const maxPageNumber = Math.ceil(this.state.total / pageSize);
 		const paginations = [];
-		for (let i = 0; i < maxPageNumber; i ++) {
+		for (let i = 0; i < maxPageNumber; i += 1) {
 			paginations.push(i + 1);
 		}
-		return (
+        return (
 			<div>
 				<div className="row">
 					{this.state.data.map(item => {
-						console.log(item);
+                        console.log(item);
 						return (
 							<div className="col-4 mt-4" key={item._id}>
 								<div className="card">
 									<div
-										className="card-img-top"
-
+                                        className="card-img-top"
+                                        
 										style={{
 											backgroundImage: `url(http://localhost:5000${item.imageUrl})`,
 											backgroundSize: 'cover',
@@ -150,13 +121,12 @@ class HomeScreen extends Component {
 											margin: '10px',
 											padding: '20px'
 										}}
-									></div>
+                                    ></div>
+                                    
 
-
-
+                                    
 									<div className="card-body">
-										<h5 className="card-title">{item.author.email}</h5>
-										<h5 className="card-title" style={{ color: 'lightgrey' }}>{item.price}đ</h5>
+										<h5 className="card-title">ahihi</h5>
 										<p
 											className="card-text"
 											style={{
@@ -165,8 +135,7 @@ class HomeScreen extends Component {
 												overflow: 'hidden'
 											}}
 										>
-											
-											{item.name}
+											{item.content}
 										</p>
 										<a href="#" onClick={() => this.handlePostClick(item)} className="btn btn-primary">
 											Detail
@@ -227,65 +196,58 @@ class HomeScreen extends Component {
 					</ul>
 				</nav>
 
-				{this.state.detailModalVisible ? (
-					<div
-						className="modal fade show"
-						role="dialog"
-						tabIndex="-1"
-						style={{
-							display: 'block',
-							backgroundColor: 'rgba(0, 0, 0, 0.5)',
-						}}
-						onClick={this.closeDetailModal}
-					>
-						<div className="modal-dialog" role="document">
-							<div className="modal-content" onClick={(event) => {
-								event.stopPropagation();
-							}}>
-								<div className="modal-body">
-									<div
-										className="card-img-top"
-										style={{
-											backgroundImage: `url(http://localhost:5000${this.state.selectedPost.imageUrl})`,
-											backgroundSize: 'cover',
-											backgroundPosition: 'center',
-											backgroundRepeat: 'no-repeate',
-											height: '350px',
-											width: 'auto'
-										}}
-									></div>
-									<div className="card-body">
-										{/* <h5 className="card-title">{this.state.selectedPost}</h5> */}
-										<p
-											className="card-text"
-										>
-											{this.state.selectedPost.content}
-										</p>
-										<button
-											type="button"
-											className="btn btn-secondary"
-											onClick={this.handleAddToCart}
-										>
-											Add to CART
+        {this.state.detailModalVisible ? (
+          <div
+            className="modal fade show"
+            role="dialog"
+            tabIndex="-1"
+            style={{
+              display: 'block',
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            }}
+            onClick={this.closeDetailModal}
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content" onClick={(event) => {
+                event.stopPropagation();
+              }}>
+                <div className="modal-body">
+                  <div
+                    className="card-img-top"
+                    style={{
+                      backgroundImage: `url(http://localhost:3001${this.state.selectedPost.imageUrl})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeate',
+                      height: '350px',
+                      width: 'auto'
+                    }}
+                  ></div>
+                  <div className="card-body">
+                    <h5 className="card-title">{this.state.selectedPost.author.fullName}</h5>
+                    <p
+                      className="card-text"
+                    >
+                      {this.state.selectedPost.content}
+                    </p>
+                  </div>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={this.closeDetailModal}
+                  >
+                    Close
                   </button>
-									</div>
-								</div>
-								<div className="modal-footer">
-									<button
-										type="button"
-										className="btn btn-secondary"
-										onClick={this.closeDetailModal}
-									>
-										Close
-                  </button>
-								</div>
-							</div>
-						</div>
-					</div>
-				) : null}
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
 			</div>
 		)
-	}
+    }
 }
 
 export default HomeScreen;

@@ -7,6 +7,7 @@ import PostScreen from './components/PostScreen';
 import RegisterPage from './components/RegisterPage';
 import CartScreen from './components/CartScreen';
 import SearchScreen from './components/SearchScreen';
+
 export default class App extends Component {
   render() {
     return (
