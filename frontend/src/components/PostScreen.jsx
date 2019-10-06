@@ -244,6 +244,4 @@ class PostScreen extends Component {
     }
 
 }
-
-
 export default PostScreen;
