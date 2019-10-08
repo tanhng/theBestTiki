@@ -34,8 +34,8 @@ usersRouter.post("/register", async (req, res) => {
                 const hashPassword = bcryptjs.hashSync(req.body.password, 10);
                 //create user record
                 const newUser = await UsersModel.create({
-                    email: email,
-                    name: fullName,
+                    email: req.body.email,
+                    name: req.body.fullName,
                     password: hashPassword
                 })
                 res.status(201).json({
