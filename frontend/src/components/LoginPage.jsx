@@ -7,7 +7,6 @@ export default class LoginScreen extends Component {
 
         this.state = {
             errMessage: "",
-            // isSuccess: true
             loading: false
         }
     }
@@ -41,7 +40,6 @@ export default class LoginScreen extends Component {
             } else {
                 //save data to localStorage
                 window.localStorage.setItem("email", data.data.email);
-
                 window.location.href = "/";
             }
         } catch (err) {
@@ -57,62 +55,57 @@ export default class LoginScreen extends Component {
 
     render() {
         return (
-            <div className='row'>
-                <div className="col-4"></div>
-                <div className="col-4">
-                    <h2>Login</h2>
-                    <form onSubmit={this.handleFormSubmit}>
-                        <div className="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input
-                                type="email"
-                                className="form-control"
-                                id="exampleInputEmail1"
-                                placeholder="Enter email"
-                                ref={input => { this.email = input }}
-                                required
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                id="exampleInputPassword1"
-                                placeholder="Enter password"
-                                ref={input => { this.pass = input }}
-                                required
-                            />
-                        </div>
-
-                        {this.state.errMessage ? (
-                            <div class="alert alert-danger" role="alert">
-                                {this.state.errMessage}
+            <div>
+                <div className="card card mx-auto mt-5 w-25">
+                    <article className="card-body">
+                        <h4 className="card-title text-center mb-4 mt-1">Sign in</h4>
+                        <p>
+                            <a href="" className="btn btn-block btn-twitter"> <i className="fab fa-twitter"></i> &nbsp; Login via Twitter</a>
+                            <a href="" className="btn btn-block btn-facebook"> <i className="fab fa-facebook-f"></i> &nbsp; Login via facebook</a>
+                        </p>
+                        <p className="divider-text">
+                            <span>OR</span>
+                        </p>
+                        <form onSubmit={this.handleFormSubmit}>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-user"></i> </span>
+                                </div>
+                                <input name="" className="form-control" placeholder="Email or login" type="email"
+                                    ref={input => { this.email = input }}
+                                    required
+                                />
                             </div>
-                        ) : null}
-
-                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
+                                </div>
+                                <input className="form-control" placeholder="******" type="password"
+                                    ref={input => { this.pass = input }}
+                                    required
+                                />
+                            </div>
+                            {this.state.errMessage ? (
+                                <div className="alert alert-danger" role="alert">
+                                    {this.state.errMessage}
+                                </div>
+                            ) : null}
                             {this.state.loading ? (
-                                <div className="spinner-border" role="status">
+                                <div className="spinner-border" role="status"
+                                    style={{ display: 'flex', justifyContent: 'center' }}>
                                     <span className="sr-only">Loading...</span>
                                 </div>
                             ) : (
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                )}
-                        </div>
-
-                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title=""
-                            style={{
-                                margin: '20% 45%'
-                            }}
-                            onClick={() => { window.location.href = 'http://localhost:5000/user/auth/google' }}
-                        >
-                            Login With Google
-                </button>
-                    </form>
+                                    <div className="form-group">
+                                        <button type="submit" className="btn btn-primary btn-block"> Login  </button>
+                                    </div>
+                                )
+                            }
+                            <p className="text-center">Have account? <a href="/register">Sign up</a> </p>
+                            <p className="text-center"><a href="#" className="btn">Forgot password?</a></p>
+                        </form>
+                    </article>
                 </div>
-                <div className="col-4"></div>
             </div>
         )
     }

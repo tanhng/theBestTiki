@@ -12,8 +12,6 @@ export default class RegisterPage extends Component {
             // confirmPassword: "",
             // fullName: "",
             errMessage: "",
-            isSuccess: false,
-            counter: 3,
             loading: false,
         }
     }
@@ -32,7 +30,7 @@ export default class RegisterPage extends Component {
             });
         } else if (this.pass.value !== this.pass2.value) {
             this.setState({
-                errMessage: 'Confirm password didnt match'
+                errMessage: 'Confirm password not matching'
             });
         } else {
             this.setState({
@@ -59,25 +57,9 @@ export default class RegisterPage extends Component {
                         errMessage: data.message,
                     });
                 } else {
-                    this.setState({
-                        isSuccess: true
-                    });
-                    setTimeout(() => {
-                        this.setState({
-                            counter: 2,
-                        });
-                    }, 1000);
-                    setTimeout(() => {
-                        this.setState({
-                            counter: 1,
-                        });
-                    }, 2000);
-                    setTimeout(() => {
-                        this.setState({
-                            counter: 0,
-                        });
-                        window.location.href = '/login';
-                    }, 3000);
+                    //save data to localStorage
+                    window.localStorage.setItem("email", data.data.email);
+                    window.location.href = "/";
                 }
             } catch (err) {
                 this.setState({
@@ -93,84 +75,98 @@ export default class RegisterPage extends Component {
 
     render() {
         return (
-            <div className="row">
-                <div class="col-4"></div>
-                <div class="col-4">
-                    <h2>Register Account </h2>
-                    <form onSubmit={this.handleFormSubmit}>
-                        <div className="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input
-                                type="email"
-                                className="form-control"
-                                id="exampleInputEmail1"
-                                placeholder="Enter email"
-                                ref={input => { this.email = input }}
-                                required
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                id="exampleInputPassword1"
-                                placeholder="Enter password"
-                                ref={input => { this.pass = input }}
-                                required
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label for="exampleInputPassword2">Confirm password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                id="exampleInputPassword2"
-                                placeholder="Confirm password"
-                                ref={input => { this.pass2 = input }}
-                                required
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label for="exampleInputFullname">Full name</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="exampleInputFullname"
-                                placeholder="Enter fullname"
-                                ref={input => { this.name = input }}
-                                required
-                            />
-                        </div>
-
-                        {this.state.errMessage ? (
-                            <div class="alert alert-danger" role="alert">
-                                {this.state.errMessage}
+            <div>
+                <div className="card mx-auto mt-5 w-25">
+                    <article className="card-body mx-auto" style={{ maxWidth: "400px" }}>
+                        <h4 className="card-title mt-3 text-center">Create Account</h4>
+                        <p className="text-center">Get started with your free account</p>
+                        <p>
+                            <a href="" className="btn btn-block btn-twitter"> <i className="fab fa-twitter"></i> &nbsp; Login via Twitter</a>
+                            <a href="" className="btn btn-block btn-facebook"> <i className="fab fa-facebook-f"></i> &nbsp; Login via facebook</a>
+                        </p>
+                        <p className="divider-text">
+                            <span>OR</span>
+                        </p>
+                        <form onSubmit={this.handleFormSubmit}>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-user"></i> </span>
+                                </div>
+                                <input name="" className="form-control" placeholder="Full name" type="text"
+                                    ref={input => { this.name = input }}
+                                    required
+                                />
                             </div>
-                        ) : null}
-
-                        {this.state.isSuccess ? (
-                            <div class="alert alert-success" role="alert">
-                                Login success! Redirect in {this.state.counter}s
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
+                                </div>
+                                <input name="" className="form-control" placeholder="Email address" type="email"
+                                    ref={input => { this.email = input }}
+                                    required
+                                />
                             </div>
-                        ) : null}
-
-                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-phone"></i> </span>
+                                </div>
+                                <select className="custom-select" style={{ maxWidth: "120px" }}>
+                                    <option selected="">+84</option>
+                                    <option value="1">+198</option>
+                                </select>
+                                <input name="" className="form-control" placeholder="Phone number" type="text" />
+                            </div>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-building"></i> </span>
+                                </div>
+                                <select className="form-control">
+                                    <option selected=""> Select job type</option>
+                                    <option>Designer</option>
+                                    <option>Manager</option>
+                                    <option>Accaunting</option>
+                                </select>
+                            </div>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
+                                </div>
+                                <input className="form-control" placeholder="Create password" type="password"
+                                    ref={input => { this.pass = input }}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
+                                </div>
+                                <input className="form-control" placeholder="Repeat password" type="password"
+                                    ref={input => { this.pass2 = input }}
+                                    required
+                                />
+                            </div>
+                            {this.state.errMessage ? (
+                                <div className="alert alert-danger" role="alert">
+                                    {this.state.errMessage}
+                                </div>
+                            ) : null}
                             {this.state.loading ? (
-                                <div className="spinner-border" role="status">
+                                <div className="spinner-border" role="status"
+                                    style={{ display: 'flex', justifyContent: 'center' }}>
                                     <span className="sr-only">Loading...</span>
                                 </div>
                             ) : (
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                )}
-                        </div>
-                    </form>
+                                    <div className="form-group">
+                                        <button type="submit" className="btn btn-primary btn-block"> Create Account  </button>
+                                    </div>
+                                )
+                            }
+
+                            <p className="text-center">Have an account? <a href="/login">Sign In</a> </p>
+                        </form>
+                    </article>
                 </div>
-                <div class="col-4"></div>
-            </div>
+            </div >
         )
     }
 }

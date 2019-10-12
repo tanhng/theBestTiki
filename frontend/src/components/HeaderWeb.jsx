@@ -126,8 +126,8 @@ export default class HeaderWeb extends Component {
                             <div className="row align-items-center">
                                 <div className="col-lg-3 col-sm-4">
                                     <div className="brand-wrap">
-                                        <img className="logo" src="images/logo-dark.png" />
-                                        <h2 className="logo-text">LOGO</h2>
+                                        <img className="logo" src="images/logo-girl.png" />
+                                        <h2 className="logo-text">Teki</h2>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-xl-5 col-sm-8">
