@@ -87,33 +87,33 @@ export default class HeaderWeb extends Component {
     render() {
         return (
             <div>
-                <header class="section-header">
-                    <nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
-                        <div class="container">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
+                <header className="section-header">
+                    <nav className="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
+                        <div className="container">
+                            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                                <span className="navbar-toggler-icon"></span>
                             </button>
 
-                            <div class="collapse navbar-collapse" id="navbarsExample07">
-                                <ul class="navbar-nav mr-auto">
-                                    <li><a href="#" class="nav-link"> <i class="fab fa-facebook"></i> </a></li>
-                                    <li><a href="#" class="nav-link"> <i class="fab fa-instagram"></i> </a></li>
-                                    <li><a href="#" class="nav-link"> <i class="fab fa-twitter"></i> </a></li>
+                            <div className="collapse navbar-collapse" id="navbarsExample07">
+                                <ul className="navbar-nav mr-auto">
+                                    <li><a href="#" className="nav-link"> <i className="fab fa-facebook"></i> </a></li>
+                                    <li><a href="#" className="nav-link"> <i className="fab fa-instagram"></i> </a></li>
+                                    <li><a href="#" className="nav-link"> <i className="fab fa-twitter"></i> </a></li>
                                 </ul>
-                                <ul class="navbar-nav">
-                                    <li class="nav-item"><a href="#" class="nav-link" > Delivery </a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link" > Help </a></li>
-                                    <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> USD </a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a class="dropdown-item" href="#">EUR</a></li>
-                                            <li><a class="dropdown-item" href="#">AED</a></li>
-                                            <li><a class="dropdown-item" href="#">RUBL </a></li>
+                                <ul className="navbar-nav">
+                                    <li className="nav-item"><a href="#" className="nav-link" > Delivery </a></li>
+                                    <li className="nav-item"><a href="#" className="nav-link" > Help </a></li>
+                                    <li className="nav-item dropdown"><a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown"> USD </a>
+                                        <ul className="dropdown-menu dropdown-menu-right">
+                                            <li><a className="dropdown-item" href="#">EUR</a></li>
+                                            <li><a className="dropdown-item" href="#">AED</a></li>
+                                            <li><a className="dropdown-item" href="#">RUBL </a></li>
                                         </ul>
                                     </li>
-                                    <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">   Language </a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a class="dropdown-item" href="#">English</a></li>
-                                            <li><a class="dropdown-item" href="#">Vietnamese</a></li>
+                                    <li className="nav-item dropdown"><a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">   Language </a>
+                                        <ul className="dropdown-menu dropdown-menu-right">
+                                            <li><a className="dropdown-item" href="#">English</a></li>
+                                            <li><a className="dropdown-item" href="#">Vietnamese</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -121,103 +121,105 @@ export default class HeaderWeb extends Component {
                         </div>
                     </nav>
 
-                    <section class="header-main shadow-sm">
-                        <div class="container">
-                            <div class="row align-items-center">
-                                <div class="col-lg-3 col-sm-4">
-                                    <div class="brand-wrap">
-                                        <img class="logo" src="images/logo-dark.png" />
-                                        <h2 class="logo-text">LOGO</h2>
+                    <section className="header-main shadow-sm">
+                        <div className="container">
+                            <div className="row align-items-center">
+                                <div className="col-lg-3 col-sm-4">
+                                    <div className="brand-wrap">
+                                        <img className="logo" src="images/logo-dark.png" />
+                                        <h2 className="logo-text">LOGO</h2>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-xl-5 col-sm-8">
-                                    <form action="#" class="search-wrap">
-                                        <div class="input-group w-100">
-                                            <input type="text" class="form-control" style={{ width: "55%" }} placeholder="Search"
+                                <div className="col-lg-4 col-xl-5 col-sm-8">
+                                    <form action="#" className="search-wrap">
+                                        <div className="input-group w-100">
+                                            <input type="text" className="form-control" style={{ width: "55%" }} placeholder="Search"
                                                 value={this.state.searchname}
                                                 onChange={this.handleSearchNameChange}
                                             />
-                                            <select class="custom-select" name="category_name">
+                                            <select className="custom-select" name="category_name">
                                                 <option value="">All type</option><option value="codex">Special</option>
                                                 <option value="comments">Only best</option>
                                                 <option value="content">Latest</option>
                                             </select>
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="submit"
+                                            <div className="input-group-append">
+                                                <button className="btn btn-primary" type="submit"
                                                     onClick={
                                                         this.handleSearch
                                                     }>
-                                                    <i class="fa fa-search"></i>
+                                                    <i className="fa fa-search"></i>
                                                 </button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-lg-5 col-xl-4 col-sm-12">
-                                    <div class="widgets-wrap float-right">
-                                        <a href="#" class="widget-header mr-3" onClick={() => { window.location.href = '/cart' }}>
-                                            <div class="icontext">
-                                                <div class="icon-wrap"><i class="icon-sm round border fa fa-shopping-cart"></i></div>
-                                                <div class="text-wrap">
-                                                    <span class="small badge badge-danger">0</span>
+                                <div className="col-lg-5 col-xl-4 col-sm-12">
+                                    <div className="widgets-wrap float-right">
+                                        <a href="#" className="widget-header mr-3" onClick={() => { window.location.href = '/cart' }}>
+                                            <div className="icontext">
+                                                <div className="icon-wrap"><i className="icon-sm round border fa fa-shopping-cart"></i></div>
+                                                <div className="text-wrap">
+                                                    <span className="small badge badge-danger">0</span>
                                                     <div>Cart</div>
                                                 </div>
                                             </div>
                                         </a>
-                                        <a href="#" class="widget-header mr-3">
-                                            <div class="icontext">
-                                                <div class="icon-wrap"><i class="icon-sm round border fa fa-heart"></i></div>
-                                                <div class="text-wrap">
+                                        <a href="#" className="widget-header mr-3">
+                                            <div className="icontext">
+                                                <div className="icon-wrap"><i className="icon-sm round border fa fa-heart"></i></div>
+                                                <div className="text-wrap">
                                                     <small>Wish</small>
                                                     <div>List</div>
                                                 </div>
                                             </div>
                                         </a>
-                                        <div class="widget-header dropdown">
+                                        <div className="widget-header dropdown">
                                             <a href="#" data-toggle="dropdown" data-offset="20,10">
-                                                <div class="icontext">
-                                                    <div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div>
+                                                <div className="icontext">
+                                                    <div className="icon-wrap"><i className="icon-sm round border fa fa-user"></i></div>
                                                     {this.state.currentUser ? (
                                                         <div>
                                                             <small>Welcome</small>
-                                                            <div>{this.state.currentUser} <i class="fa fa-caret-down"></i> </div>
+                                                            <div>{this.state.currentUser} <i className="fa fa-caret-down"></i> </div>
                                                         </div>
                                                     ) : (
-                                                            <div class="text-wrap">
+                                                            <div className="text-wrap">
                                                                 <small>Sign in | Join</small>
-                                                                <div>My account <i class="fa fa-caret-down"></i> </div>
+                                                                <div>My account <i className="fa fa-caret-down"></i> </div>
                                                             </div>
                                                         )}
                                                 </div>
                                             </a>
                                             {this.state.currentUser ? (
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="/"
+                                                // Tao bai viet, nap tien, dang xuat
+                                                <div className="dropdown-menu dropdown-menu-right">
+                                                    <a className="dropdown-item" href="/"
                                                         onClick={() => {
                                                             window.location.href = "/new-post"
                                                         }}>New Post</a>
-                                                    <hr class="dropdown-divider" />
-                                                    <a class="dropdown-item" href="/" onClick={this.handleLogout}>Log out</a>
+                                                    <a className="dropdown-item" href="/payment">Payment</a>
+                                                    <hr className="dropdown-divider" />
+                                                    <a className="dropdown-item" href="/" onClick={this.handleLogout}>Log out</a>
                                                 </div>
                                             ) : (
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <form class="px-4 py-3" onSubmit={this.handleFormSubmit}>
-                                                            <div class="form-group">
+                                                    <div className="dropdown-menu dropdown-menu-right">
+                                                        <form className="px-4 py-3" onSubmit={this.handleFormSubmit}>
+                                                            <div className="form-group">
                                                                 <label>Email address</label>
-                                                                <input type="email" class="form-control" placeholder="email@example.com"
+                                                                <input type="email" className="form-control" placeholder="email@example.com"
                                                                     ref={input => { this.email = input }}
                                                                     required
                                                                 />
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div className="form-group">
                                                                 <label>Password</label>
-                                                                <input type="password" class="form-control" placeholder="Password"
+                                                                <input type="password" className="form-control" placeholder="Password"
                                                                     ref={input => { this.pass = input }}
                                                                     required
                                                                 />
                                                             </div>
                                                             {this.state.errMessage ? (
-                                                                <div class="alert alert-danger" role="alert">
+                                                                <div className="alert alert-danger" role="alert">
                                                                     {this.state.errMessage}
                                                                 </div>
                                                             ) : null}
@@ -228,13 +230,13 @@ export default class HeaderWeb extends Component {
                                                                         <span className="sr-only">Loading...</span>
                                                                     </div>
                                                                 ) : (
-                                                                        <button type="submit" class="btn btn-primary">Sign in</button>
+                                                                        <button type="submit" className="btn btn-primary">Sign in</button>
                                                                     )}
                                                             </div>
                                                         </form>
-                                                        <hr class="dropdown-divider" />
-                                                        <a class="dropdown-item" href="/register">Have account? Sign up</a>
-                                                        <a class="dropdown-item" href="#">Forgot password?</a>
+                                                        <hr className="dropdown-divider" />
+                                                        <a className="dropdown-item" href="/register">Have account? Sign up</a>
+                                                        <a className="dropdown-item" href="#">Forgot password?</a>
                                                     </div>
                                                 )}
                                         </div>
